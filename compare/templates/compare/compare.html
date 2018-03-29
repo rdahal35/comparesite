@@ -1,0 +1,23 @@
+{% if mobile_list%}
+
+	<select>
+	 	{% for company in company_list %}
+	 		<option value='{{company.company_name}}'>{{company.company_name}}</option>
+	 		
+	 	{% endfor%}
+	 	
+	</select>
+	 <select>
+	 	{% for mobiles in mobile_list %}
+	 		<option value='{{mobiles.mobile.id}}'>{{mobiles.mobile_model}}</option>
+	 		<!-- <li><a href="/compare/{{mobile_list.id}}">{{mobiles.mobile_model}}</a></li> -->
+
+	 	{% endfor%}
+	 </select>
+	 <a href="">asd</a>
+
+
+{% else %}
+	<p>no companies to show.</p>
+{% endif%}
+

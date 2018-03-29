@@ -1,4 +1,3 @@
-
 from django.db import models
 from django.utils import timezone
 from djmoney.models.fields import MoneyField
@@ -13,7 +12,7 @@ class Dispaly(models.Model):
 	Surface=models.CharField(max_length=40)
 
 	def __str__(self):
-		return "%s %SMP" %(self.Size, self.Resolution)
+		return "%s %dMP" %(self.Size, self.Resolution)
 
 class Processor(models.Model):
 	CPU= models.CharField(max_length=100)
@@ -25,8 +24,8 @@ class Processor(models.Model):
 
 
 class Camera(models.Model):
-	Lens=models.CharField(max_length=50, null=True)
-	Resolution= models.CharField(max_length=20)
+	Lens=models.CharField(max_length=50, default='-')
+	Resolution= models.DecimalField(null=True,max_digits=5, decimal_places=2)
 	Flash= models.CharField(max_length=10)
 	Secondary_camera=models.DecimalField(null=True,max_digits=5, decimal_places=2)
 
@@ -40,7 +39,7 @@ class Battery(models.Model):
 
 
 	def __str__(self):
-		return "%s %s" %(self.Type,self.Capicity)
+		return "%s %smA·h" %(self.Type,self.Capicity)
 
 class Software(models.Model):
 	operating_system=models.CharField(max_length=100)
@@ -59,18 +58,27 @@ class extraFeatures(models.Model):
 	def __str__(self):
 		return self.feature_name
 
+	
+
+class Company(models.Model):
+	company_name=models.CharField(max_length=50)
+
+	def __str__(self):
+		return self.company_name
+
+
 
 class Mobile(models.Model):
 	mobile_model=models.CharField(max_length=100)
-	mobile_company= models.CharField(max_length=200)
+	mobile_company= models.ForeignKey(Company,on_delete=models.CASCADE)
 	mobile_cost = MoneyField(decimal_places=2,default=0,default_currency='USD',max_digits=11,)
-	mobile_display=models.ForeignKey(Dispaly,on_delete=models.CASCADE ,null=True)
-	mobile_processor=models.ForeignKey(Processor,on_delete=models.CASCADE, null=True)
-	moblie_camera=models.ForeignKey(Camera,on_delete=models.CASCADE, null=True)
-	mobile_battery=models.ForeignKey(Battery,on_delete=models.CASCADE, null=True)
-	mobile_software=models.ForeignKey(Software, on_delete=models.CASCADE, null=True)
-	mobile_extraFeature=models.ForeignKey(extraFeatures,on_delete=models.CASCADE, null=True)
+	mobile_display=models.ForeignKey(Dispaly,on_delete=models.CASCADE ,null=True, editable=True)
+	mobile_processor=models.ForeignKey(Processor,on_delete=models.CASCADE, null=True,editable=True)
+	moblie_camera=models.ForeignKey(Camera,on_delete=models.CASCADE, null=True,editable=True)
+	mobile_battery=models.ForeignKey(Battery,on_delete=models.CASCADE, null=True,editable=True)
+	mobile_software=models.ForeignKey(Software, on_delete=models.CASCADE, null=True,editable=True)
+	mobile_extraFeature=models.ManyToManyField(extraFeatures,  blank=True,editable=True)
 
 	def __str__(self):
-		return self.mobile_company+' '+self.mobile_model
+		return str(self.mobile_company)+ str(self.mobile_model)
 
