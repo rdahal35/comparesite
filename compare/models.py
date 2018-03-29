@@ -80,5 +80,5 @@ class Mobile(models.Model):
 	mobile_extraFeature=models.ManyToManyField(extraFeatures,  blank=True,editable=True)
 
 	def __str__(self):
-		return str(self.mobile_company)+ str(self.mobile_model)
+		return str(self.mobile_company)+' '+ str(self.mobile_model)
 

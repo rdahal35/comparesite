@@ -2,10 +2,11 @@ from django.urls import path
 
 from . import views
 
-app_name='compare'
+
 urlpatterns =[
 	path('',views.index, name='index'),
-	path('',views.detail, name='detail')
+	path('comparepage/',views.comparepage, name='comparepage'),
+	path('<int:pk>/',views.detail, name='detail'),
 
 
 ]
