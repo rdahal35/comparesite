@@ -1,54 +1,138 @@
 {% load static %}
-<!DOCTYPE html>
-<html lang="en" class="no-js">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
-		<meta name="viewport" content="width=device-width, initial-scale=1"> 
-		<title>Review Website</title>
-		<meta name="description" content="Perspective Page View Navigation: Transforms the page in 3D to reveal a menu" />
-		<meta name="keywords" content="3d page, menu, navigation, mobile, perspective, css transform, web development, web design" />
-		<meta name="author" content="Codrops" />
-		<link rel="shortcut icon" href="../favicon.ico">
-		<link rel="stylesheet" type="text/css" href="{% static 'compare/css/normalize.css' %}" />
-		<link rel="stylesheet" type="text/css" href="{% static 'compare/css/demo.css' %}" />
-		<link rel="stylesheet" type="text/css" href="{% static 'compare/css/component.css' %}" />
-		<!-- csstransforms3d-shiv-cssclasses-prefixed-teststyles-testprop-testallprops-prefixes-domprefixes-load --> 
-		<script src="{% static 'compare/js/modernizr.custom.25376.js' %}"></script>
-	</head>
-	<body>
-		<div id="perspective" class="perspective effect-rotateleft">
-			<div class="container">
-				<div class="wrapper"><!-- wrapper needed for scroll -->
-					<!-- Top Navigation -->
-					<header class="codrops-header">
-						<h1>Our Gadget Site <span>Click to see the menu</span></h1>	
-					</header>
-					<div class="main clearfix">
-						<div class="column">
-							<p><button id="showMenu">Show Menu</button></p>
-							<p>Click on this button to see the content and much more</p>
-						</div>
-						<div class="column">
-							<nav class="codrops-demos">
-								
-							</nav>
-						</div>
-						
-					</div><!-- /main -->
-				</div><!-- wrapper -->
-			</div><!-- /container -->
-			<nav class="outer-nav right vertical">
-				<a href="#" class="icon-home">Home</a>
-				<a href="#" class="icon-news">News</a>
-				<a href="{% url 'comparepage' %}" class="icon-image">Compare</a>
-				<a href="#" class="icon-upload">Review</a>
-				<a href="#" class="icon-star">Latest</a>
-				<a href="#" class="icon-mail">Contact</a>
-				<a href="#" class="icon-lock">Sign Up</a>
-			</nav>
-		</div><!-- /perspective -->
-		<script src="{% static 'compare/js/classie.js' %}"></script>
-		<script src="{% static 'compare/js/menu.js' %}"></script>
-	</body>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>Awesome Bubble Navigation with jQuery</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="Awesome Bubble Navigation with jQuery" />
+        <meta name="keywords" content="jquery, circular menu, navigation, round, bubble"/>
+        <link rel="stylesheet" href="{%static 'compare/css/style.css' %}" type="text/css" media="screen"/>
+        <style>
+            *{
+                margin:0;
+                padding:0;
+            }
+            body{
+                font-family:Arial;
+                background:#fff url({% static 'compare/images/bg.png' %}) no-repeat top left;
+            }
+            .title{
+                width:548px;
+                height:119px;
+                position:absolute;
+                top:400px;
+                left:150px;
+                background:transparent url(title.png) no-repeat top left;
+            }
+            a.back{
+                background:transparent url(back.png) no-repeat top left;
+                position:fixed;
+                width:150px;
+                height:27px;
+                outline:none;
+                bottom:0px;
+                left:0px;
+            }
+            #content{
+                margin:0 auto;
+            }
+
+
+        </style>
+    </head>
+
+    <body>
+        <div id="content">
+            <a class="back" href="http://tympanus.net/codrops/2010/04/29/awesome-bubble-navigation-with-jquery"></a>
+            <div class="title"></div>
+
+            <div class="navigation" id="nav">
+                <div class="item user">
+                    <img src="{% static 'compare/images/bg_user.png' %}" alt="" width="199" height="199" class="circle"/>
+                    <a href="#" class="icon"></a>
+                    <h2>User</h2>
+                    <ul>
+                        <li><a href="#">Login</a></li>
+                        <li><a href="#">Signup</a></li>
+                    </ul>
+                </div>
+                <div class="item home">
+                    <img src="{% static 'compare/images/bg_home.png' %}" alt="" width="199" height="199" class="circle"/>
+                    <a href="#" class="icon"></a>
+                    <h2>Home</h2>
+                    <ul>
+                        <li><a href="#">Reviews</a></li>
+                        <li><a href="#">News</a></li>
+                        <li><a href="#">Market</a></li>
+                    </ul>
+                </div>
+                <div class="item shop">
+                    <img src="{% static 'compare/images/bg_shop.png' %}" alt="" width="199" height="199" class="circle"/>
+                    <a href="#" class="icon"></a>
+                    <h2>Compare</h2>
+                    <ul>
+                        <li><a href="{% url 'comparepage' %}">Phones</a></li>
+                        <li><a href="#">Laptops</a></li>
+                        <li><a href="#">TV</a></li>
+                    </ul>
+                </div>
+                <div class="item camera">
+                    <img src="{% static 'compare/images/bg_camera.png' %}" alt="" width="199" height="199" class="circle"/>
+                    <a href="#" class="icon"></a>
+                    <h2>Photos</h2>
+                    <ul>
+                        <li><a href="#">Gallery</a></li>
+                        <li><a href="#">Prints</a></li>
+                        <li><a href="#">Submit</a></li>
+                    </ul>
+                </div>
+                <div class="item fav">
+                    <img src="{% static 'compare/images/bg_fav.png' %}" alt="" width="199" height="199" class="circle"/>
+                    <a href="#" class="icon"></a>
+                    <h2>About</h2>
+                    <ul>
+                        <li><a href="#">Social</a></li>
+                        <li><a href="#">Support</a></li>
+                        <li><a href="#">Comments</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- The JavaScript -->
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+        <script type="text/javascript" src="{% static 'compare/jquery.easing.1.3.js' %}"></script>
+        <script type="text/javascript">
+            $(function() {
+                $('#nav > div').hover(
+                function () {
+                    var $this = $(this);
+                    $this.find('img').stop().animate({
+                        'width'     :'199px',
+                        'height'    :'199px',
+                        'top'       :'-25px',
+                        'left'      :'-25px',
+                        'opacity'   :'1.0'
+                    },500,'easeOutBack',function(){
+                        $(this).parent().find('ul').fadeIn(700);
+                    });
+
+                    $this.find('a:first,h2').addClass('active');
+                },
+                function () {
+                    var $this = $(this);
+                    $this.find('ul').fadeOut(500);
+                    $this.find('img').stop().animate({
+                        'width'     :'52px',
+                        'height'    :'52px',
+                        'top'       :'0px',
+                        'left'      :'0px',
+                        'opacity'   :'0.1'
+                    },5000,'easeOutBack');
+
+                    $this.find('a:first,h2').removeClass('active');
+                }
+            );
+            });
+        </script>
+    </body>
 </html>
