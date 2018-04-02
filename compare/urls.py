@@ -5,7 +5,8 @@ from . import views
 app_name='compare'
 urlpatterns =[
 	path('',views.index, name='index'),
-	path('',views.detail, name='detail')
+	path('detail/<int:mobile_id>',views.detail, name='detail'),
+	path('compare/<int:obj1>and<int:obj2>/',views.compareMobile,name='compare')
 
 
 ]
